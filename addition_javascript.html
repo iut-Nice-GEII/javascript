@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+   <head>
+	   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	   <meta charset="UTF-8">
+      <script>
+		  
+         function somme(){
+             var nbr1, nbr2, sum;
+             nbr1 = Number(document.getElementById("nbr1").value);
+             nbr2 = Number(document.getElementById("nbr2").value);
+             sum = nbr1 + nbr2;
+			 document.getElementById("response").innerHTML = "The sum of "+nbr1+" and " + nbr2 + " is " + sum;  
+			return false;
+         }
+      </script>
+   </head>
+   <body>
+	<form>  
+		Enter First Number:  
+		<input type="number" name="number1" id="nbr1"><br><br>  
+		Enter Second Number:  
+		<input type="number" name="number2" id="nbr2"><br><br>  
+		<button type="button" onclick="somme()">Add</button>
+	</form> 
+	<p id="response"></p>
+   </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <script> 
+        function msg() { 
+
+			var p=document.getElementById("textchanged");
+			var source=document.getElementById("input1");
+			alert(" value submitted: " + source.value); 
+			p.textContent= source.value;
+			p.style.color="white";
+			p.style.backgroundColor ="black";
+			console.log(source);
+        } 
+    </script> 
+</head> 
+      
+<body style = "text-align:center;">  
+  
+    <h1 style = "color:green;" >  
+        First test javascript 
+    </h1>  
+          
+    <h2>Using Input type</h2>  
+      
+    <form> 
+        <label for="submit"> 
+            Enter value 
+        </label> 
+          
+        <input type = "text" id="input1"> 
+      
+        <input type="button" id="submit" 
+            onclick ="msg()" value="GO">  
+    </form>  
+    <p id="textchanged" style="margin:1em 3em;padding:1em"> 
+        Click en on button
+    </p> 
+</body> 
+  
+</html>  
