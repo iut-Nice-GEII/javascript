@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+       body{
+          background-color: grey;
+          text-align: left;
+       }
+       form{
+          width:300px;
+          background-color: rgb(220, 245, 227);
+          padding: 1em;
+       }
+       p{
+          background-color: rgb(98, 71, 46);
+          padding: 1em;
+          color:whitesmoke;
+       }
+
+    </style>
+  </head>
+  <body>
+    <form action="http://ptsv2.com/t/geii/post" method="GET">
+      <p>
+        <label> ton nom : </label>
+        <input type="text" id="name" name="name" />
+      </p>
+      <p>
+        <label> ton email : </label>
+        <input type="email" id="email" name="email" />
+      </p>
+	  <p>
+	  <label> ta couleur : </label>
+	  <select name="color">
+		<option value="orange">orange</option>
+		<option value="blue" selected>bleu</option>
+		<option value="red">rouge</option>
+	  </select>
+	  </p>
+   <p>
+      Ton age : <br />
+       <input type="radio" name="age" value="moins25" id="moins55" /> <label for="moins55">Moins de 15 ans</label><br />
+       <input type="radio" name="age" value="medium25-50" id="medium25-50" /> <label for="medium25-50">25-50 ans</label><br />
+       <input type="radio" name="age" value="plus50" id="plus50" /> <label for="plus50">Plus de 50 ans</label>
+   </p>
+   <p>
+     Ta couleur : <br/>
+	 <input type="color" name="color"/>
+   </p>
+
+      <input type="submit" value="SEND TO SERVER ptsv2.com" />
+    </form>
+  </body>
+</html>
