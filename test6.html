@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+   <head>
+	   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	   <!--bootstrap pour que ce soit plus joli-->
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	   
+	   <meta charset="UTF-8">
+	   <style>
+	   /*pour que l'on ait 4 boites par colonnes de hauteur 40px*/
+         .output * {
+		box-sizing: border-box;
+		}
+		.output ul {
+		padding-left: 0;
+		}
+
+		.output li {
+			display: block;
+			float: left;
+			width: 25%;
+			border: 2px solid white;
+			padding: 5px;
+			height: 40px;
+			background-color: blue;
+			color: white;
+			text-align: center;
+		}      
+		/* petits effets spéciaux lorsqu'on passe au dessus d'un 'li'*/
+		.output li:hover{
+			color:yellow;
+			cursor:grag;
+			font-size:1.2em;
+			border:yellow 3px solid;
+			border-radius: 15px;
+		}
+	   </style>
+   </head>
+   <!-- on génère les boites pour le mois de janvier-->
+   <body onload=' createCalendar(31,"Janvier")';>
+   <div class="output" style="height: 500px;overflow: auto;">
+  <label for="month">Choisissez un mois : </label>
+  <select id="month">
+    <option value="Janvier">Janvier</option>
+    <option value="Février">Février</option>
+    <option value="Mars">Mars</option>
+    <option value="Avril">Avril</option>
+    <option value="Mai">Mai</option>
+    <option value="Juin">Juin</option>
+    <option value="Juillet">Juillet</option>
+    <option value="Août">Août</option>
+    <option value="Septembre">Septembre</option>
+    <option value="Octobre">Octobre</option>
+    <option value="Novembre">Novembre</option>
+    <option value="Decembre">Décembre</option>
+  </select>
+  <!-- zone qui va être générée automatiquement par javascript au chargement 'onload'-->
+  <h1></h1>
+  <ul></ul>
+  </div>
+  <!-- du bootstrap pour le bouton-->
+  <div class="text-center">
+  <button type="button" class="btn btn-primary" onclick="display_selection()">SEND</button>
+  </div>
+  <hr>
+  <div id="textsend" class="px-3 text-center border-primary rounded border ">    
+  </div>
+
+<script>
+var select = document.querySelector('select');
+var list = document.querySelector('ul');
+var h1 = document.querySelector('h1');
+// mise à jour des couleurs de chaque boite sur le clic
+list.onclick = function(event) {
+    var target = event.target;
+    if(target.style.backgroundColor==="grey")
+        target.style.backgroundColor="blue";
+    else
+        target.style.backgroundColor="grey"; 
+};
+///choix des jours en fonction du mois choisi et appel de createCalendar
+select.onchange = function() {
+  var choice = select.value;  
+  var days = 31;
+  if(choice === 'Février')  days = 28;
+  else if(choice === 'Avril' || choice === 'Juin' || choice === 'Septembre'|| choice === 'Novembre') 
+	days = 30;
+  createCalendar(days, choice);
+}
+//mise à jour de h1 et génération des boites en fonction du nombre de jours
+function createCalendar(days, choice) {
+  list.innerHTML = '';
+  h1.textContent = choice;
+  for(var i = 1; i <= days; i++) {
+    var listItem = document.createElement('li');
+    listItem.style.backgroundColor='grey';
+	listItem.textContent = i;
+	list.appendChild(listItem);
+  }
+ }
+ //affichage des jours sélectionnés
+ function display_selection(){
+ 	//récup de la liste des items 'li'
+ 	const items = list.getElementsByTagName('li');
+ 	//première solution pour parcourir chaque élément de la liste
+    for (let item of items) {
+       console.log(""+item.innerHTML+"="+item.style.backgroundColor);
+    }
+ 	let array_days=[]; //tableau d'accueil des élements sélectionnés
+ 	//deuxième solution pour parcourir chaque élément de la liste
+ 	for(let i=0;i<items.length;i++){
+	  if(items[i].style.backgroundColor==='blue')
+	      array_days.push(i+1); // on place dans le tableau les jours sélectionnés
+    }
+    //première solution pour parcourir le tableau
+    for(let item of array_days)
+        console.log(item)
+    let text_display=document.getElementById('textsend');
+    text_display.innerHTML="Jours sélectionnés : ";
+    //deuxième solution pour parcourir le tableau
+ 	for(let i=0;i<array_days.length;i++)
+ 	  if(i==0)
+ 	    text_display.innerHTML+=array_days[i];
+ 	  else
+ 	    text_display.innerHTML+=","+array_days[i];
+ 	text_display.innerHTML+=" du mois de "+ select.value;
+ }
+</script>
+	
+      </body>
+</html>

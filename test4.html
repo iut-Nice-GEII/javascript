@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+   <head>
+	   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	   <meta charset="UTF-8">
+	   <style>
+	   .reponse{
+	       margin:2em;
+	       padding:10px;
+	   }
+	   </style>
+   </head>
+   <body>
+	<button>Pressez‑moi</button>
+	<div class="reponse"> </div>
+   <script>
+        let button = document.querySelector('button');
+        button.addEventListener("click",function(event){          
+          console.log("test1");
+          let name = prompt('Quel est votre nom ?');
+          let reponse= document.querySelector(".reponse");
+          console.log("reponse="+reponse.innerHtml);
+          reponse.style.backgroundColor = 'black';
+          reponse.style.color='beige';
+          reponse.textContent='Hello ' + name + ', sympa de vous voir !';});
+       /* button.onclick = function() {
+          console.log("test1");
+          let name = prompt('Quel est votre nom ?');
+          let reponse= document.querySelector(".reponse");
+          console.log("reponse="+reponse.innerHtml);
+          reponse.style.backgroundColor = 'black';
+          reponse.style.color='beige';
+          reponse.textContent='Hello ' + name + ', sympa de vous voir !';
+          //alert('Hello ' + name + ', sympa de vous voir !');
+}*/
+   </script>
+      </body>
+</html>
