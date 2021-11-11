@@ -11,7 +11,7 @@
 		box-sizing: border-box;
 		}
 		.output ul {
-		padding-left: 0;
+		padding: 0 20%;
 		}
 
 		.output li {
@@ -37,7 +37,7 @@
    </head>
    <!-- on génère les boites pour le mois de janvier-->
    <body onload=' createCalendar(31,"Janvier")';>
-   <div class="output" style="height: 500px;overflow: auto;">
+
   <label for="month">Choisissez un mois : </label>
   <select id="month">
     <option value="Janvier">Janvier</option>
@@ -54,9 +54,11 @@
     <option value="Decembre">Décembre</option>
   </select>
   <!-- zone qui va être générée automatiquement par javascript au chargement 'onload'-->
-  <h1></h1>
+   <h1></h1>
+    
+     <div class="output" style="height: 400px;overflow: auto;" >
   <ul></ul>
-  </div>
+ </div>
   <!-- du bootstrap pour le bouton-->
   <div class="text-center">
   <button type="button" class="btn btn-primary" onclick="display_selection()">SEND</button>
@@ -101,7 +103,7 @@ function createCalendar(days, choice) {
  function display_selection(){
  	//récup de la liste des items 'li'
  	const items = list.getElementsByTagName('li');
- 	//première solution pour parcourir chaque élément de la liste
+ 	//première solution pour parcourir chaque élément de la liste vue dans la console
     for (let item of items) {
        console.log(""+item.innerHTML+"="+item.style.backgroundColor);
     }
@@ -111,18 +113,25 @@ function createCalendar(days, choice) {
 	  if(items[i].style.backgroundColor==='blue')
 	      array_days.push(i+1); // on place dans le tableau les jours sélectionnés
     }
-    //première solution pour parcourir le tableau
+    //première solution pour parcourir le tableau vue dans la console
     for(let item of array_days)
         console.log(item)
     let text_display=document.getElementById('textsend');
     text_display.innerHTML="Jours sélectionnés : ";
     //deuxième solution pour parcourir le tableau
+    if(array_days.length==0){
+        text_display.innerHTML="Aucun jour sélectionné";
+        text_display.style.color='red';
+    }else
+    {
+    	text_display.style.color='green';
  	for(let i=0;i<array_days.length;i++)
  	  if(i==0)
  	    text_display.innerHTML+=array_days[i];
  	  else
  	    text_display.innerHTML+=","+array_days[i];
  	text_display.innerHTML+=" du mois de "+ select.value;
+    }
  }
 </script>
 	
