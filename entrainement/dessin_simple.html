@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .toolbox {
+            margin-bottom: 20px;
+            display: left;
+        }
+
+        canvas {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toolbox">
+        <button id="square-btn">Carré</button>
+        <button id="circle-btn">Cercle</button>
+        <button id="line-btn">Ligne</button>
+        <button id="rectangle-btn">Rectangle</button>
+        <button id="clear-btn" onclick="clear()">CLEAR</button>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        let isDrawing = false;
+        let startX, startY;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            startX = e.offsetX;
+            startY = e.offsetY;
+            drawcircle(startX, startY);
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+
+            const x = e.offsetX;
+            const y = e.offsetY;
+            drawShape(startX, startY, x, y);
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            drawcircle(e.offsetX, e.offsetY);
+        });
+
+        function drawShape(x1, y1, x2, y2) {
+            context.beginPath();
+            context.lineWidth = 2;
+            context.fillStyle = "black";
+            if (document.getElementById('square-btn').classList.contains('selected')) {
+                context.rect(x1, y1, x2 - x1, y2 - y1);
+            } else if (document.getElementById('circle-btn').classList.contains('selected')) {
+                const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                context.arc(x1, y1, radius, 0, 2 * Math.PI);
+            } else if (document.getElementById('line-btn').classList.contains('selected')) {
+                context.moveTo(x1, y1);
+                context.lineTo(x2, y2);
+            } else if (document.getElementById('rectangle-btn').classList.contains('selected')) {
+                context.rect(x1, y1, x2 - x1, y2 - y1);
+            }
+
+            context.stroke();
+            context.closePath();
+        }
+        function drawcircle(x1, y1) {
+            context.beginPath();
+            context.lineWidth = 1;
+            context.arc(x1, y1, 5, 0, 2 * Math.PI);
+            context.fillStyle = "brown";
+            context.stroke();
+            context.closePath();
+        }
+        function clear() {
+            context.clear(0, 0, canvas.clientWidth, canvas.clientHeight);
+        }
+
+        // Gérer la sélection d'outils
+        const toolButtons = document.querySelectorAll('.toolbox button');
+        toolButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                toolButtons.forEach((btn) => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

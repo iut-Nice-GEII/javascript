@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adresse du serveur</title>
+    <script>
+        function afficherAdresseServeur() {
+            const protocol = window.location.protocol; // Protocole (http: ou https:)
+            const hostname = window.location.hostname; // Nom de domaine ou IP du serveur
+            const port = window.location.port;         // Port du serveur (si spécifié)
+            const origin = window.location.origin;     // Origine complète (protocole + domaine + port)
+
+            console.log("Protocole :", protocol);
+            console.log("Nom d'hôte (hostname) :", hostname);
+            console.log("Port :", port);
+            console.log("Origine complète (origin) :", origin);
+        }
+    </script>
+</head>
+<body onload="afficherAdresseServeur()">
+    <h1>Adresse du serveur dans la console</h1>
+</body>
+</html>

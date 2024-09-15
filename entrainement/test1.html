@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            background-color: bisque;
+            margin: 10px auto;
+            width: 800px;
+        }
+
+        #demo {
+            color: rgb(40, 40, 41);
+            background-color: antiquewhite;
+            margin: 0px auto;
+            width: 600px;
+            height: 100px;
+            text-align: center;
+            font-size: 2em;
+            color: rgb(205, 255, 208);
+            padding-top: 40px;
+        }
+
+        button {
+            float: left;
+            margin: 10px 20px;
+            padding: 20px;
+            overflow: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script src="myScript.js"></script>
+    <h2>JavaScript Template Literals</h2>
+    <p id="init"></p>
+    <h2>des fruits</h2>
+    <p id="fruits"></p>
+    <p id="demo"></p>
+    <button type="submit" onclick="test()">click on me</button>
+    <button onclick="document.getElementById('myImage').src='bulbon.png'">Turn on the light</button>
+    <img style="display: block;float:left" id="myImage" src="bulboff.png" style="width:100px">
+    <button type="submit" onclick="off()">LIGHT OFF</button>
+
+
+
+    <script>
+        const fruits = ["mangues, papayes, mandarines, poires"]
+        fruits.push("bananes");
+        let header = "Templates Literals";
+        let tags = ["template literals", "javascript", "es6"];
+
+        let html = `<h2>${header}</h2><ul>`;
+        for (const x of tags) {
+            html += `<li>${x}</li>`;
+        }
+
+        html += `</ul>`;
+        document.getElementById("init").innerHTML = html;
+        document.getElementById("fruits").innerHTML = fruits.toString();
+
+        let on_off = true;;
+        function test() {
+
+            document.getElementById("demo").innerHTML = "test";
+
+            let demo = document.getElementById("demo");
+            if (on_off === true) {
+
+                on_off = false;
+                demo.style.background = "grey";
+                // document.getElementById("demo").style.color = "white";
+
+            } else {
+                on_off = true;
+                demo.style.background = "blue";
+                // document.getElementById("demo").style.color = "green";
+
+            }
+            change_color(on_off);
+
+
+        }
+        function off() {
+            document.getElementById('myImage').src = 'bulboff.png';
+        }
+
+    </script>
+
+</body>
+
+</html>

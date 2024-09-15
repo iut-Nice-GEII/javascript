@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Form Example</title>
+    <style>
+        /* Style du bouton initial */
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Style du bouton lorsqu'il passe au vert */
+        button.success {
+            background-color: #28A745;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="myForm">
+        <label for="value">votre nom:</label>
+        <input type="text" id="value" name="value" required>
+        <button type="submit" id="submitBtn">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher le rechargement de la page
+
+            // Récupérer le bouton
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Créer un objet JSON avec les données du formulaire
+            const data = {
+                nom: document.getElementById('value').value
+            };
+			const hostname = window.location.hostname;//recup de l'adresse IP
+			const serveur = 'http://'+hostname+':3000/';
+
+            // Envoyer la requête POST avec fetch
+            fetch(serveur+'nom', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Spécifier le type de contenu comme JSON
+                },
+                body: JSON.stringify(data) // Convertir l'objet en JSON
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur du serveur');
+                }
+            })
+            .then(data => {
+                console.log('Success:', data);
+                alert(`Response from server: ${JSON.stringify(data)}`);
+
+                // Changer la couleur du bouton en vert en ajoutant la classe .success
+                submitBtn.classList.add('success');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue');
+            });
+        });
+    </script>
+
+</body>
+</html>

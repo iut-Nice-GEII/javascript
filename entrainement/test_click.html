@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test click</title>
+    <style>
+        main {
+            font-style: italic;
+            color: blue;
+        }
+
+        #canvas {
+            width: 800px;
+            margin: 10px auto;
+            background-color: bisque;
+            height: 600px;
+            position: relative;
+            ;
+        }
+
+        #circle {
+            background-color: black;
+            border-radius: 20px;
+            border: 10px rigid yellow;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            height: 30px;
+            width: 30px;
+            display: none;
+        }
+
+        h1 {
+            font-size: 1.3em;
+            color: brown
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>clic on the canvas</h1>
+            <div id="position">
+                (0,0)
+            </div>
+            <!--solution 1 :   <div id="canvas" onmousedown="displayCircle(event)">  -->
+            <div id="canvas" onmousemove="displayLine(event)">
+                <div id="circle"></div>
+            </div>
+            <div id="move">
+                (0,0)
+            </div>
+        </section>
+    </main>
+    <script>
+
+        const canvas = document.getElementById("canvas");
+        //solution 2
+        canvas.addEventListener("mousedown", displayCircle);
+        //       canvas.addEventListener("mousemove", displayLine);
+        //solution 3 : 
+        //canvas.onmousedown=function(){
+        //   displayCircle(event);
+        //}
+        function displayCircle(event) {
+            const circle = document.getElementById("circle");
+            let x = event.offsetX;
+            let y = event.offsetY;
+            circle.style.top = y + "px";
+            circle.style.left = x + "px";
+            circle.style.display = "block";
+            displayPosition(x, y);
+        }
+        function displayPosition(x, y) {
+            document.getElementById("circle").style.backgroundColor = "brown";
+            document.getElementById("position").innerHTML = "(" + x + "," + y + ")";
+        }
+        function displayLine(event) {
+            let x = event.offsetX;
+            let y = event.offsetY;
+
+            displayCircle(event);
+            displayMove(x, y);
+        }
+        function displayMove(x, y) {
+            document.getElementById("circle").style.backgroundColor = "black";
+            document.getElementById("move").innerHTML = "(" + x + "," + y + ")";
+        }
+    </script>
+</body>
+
+</html>
